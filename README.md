@@ -31,17 +31,28 @@ Pandas – leitura e manipulação dos dados meteorológicos (.csv)
 A organização do código busca manter uma separação clara entre as responsabilidades de leitura, visualização, lógica e dados:
 
 .
-├── Files/                  # Diretório contendo os arquivos .csv com dados meteorológicos
-├── Img/                    # Imagens utilizadas na interface da aplicação
-├── Src/                    # Código-fonte principal da aplicação
+├── files/                  # Diretório contendo os arquivos .csv com dados meteorológicos
+
+├── img/                    # Imagens utilizadas na interface da aplicação
+
+├── src/                    # Código-fonte principal da aplicação
+
 │   ├── models/             # Camada de dados e lógica de leitura/classificação
-│   │   ├── classificacao.py    # Possivelmente classifica os dados (ex: UV alto/baixo, níveis de umidade)
+
+│   │   ├── classificacao.py    # Entidade com a validação dos dados
+
 │   │   └── leitor.py           # Responsável por carregar e tratar os dados dos arquivos CSV
+
 │   ├── utils/              # Utilitários e constantes globais
+
 │   │   └── constants.py        # Armazena valores fixos usados em diversas partes do sistema (ex: limites UV)
+
 │   ├── views/              # Interface com o usuário (componentes visuais)
+
 │   │   ├── compoments.py       # Componentes reutilizáveis da interface (ex: cards, gráficos, textos)
+
 │   │   └── home_view.py        # Tela principal exibida ao iniciar a aplicação
+
 ├── main.py                 # Ponto de entrada da aplicação
 
 ## Como executar
