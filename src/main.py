@@ -16,11 +16,19 @@ def main(page: ft.Page):
     df = leitor.leitor_pandas(r'.\files\BD_diario.csv')
     
     classificacao = ClassificacaoClimatica(
+        # temps_media=df['Tmed'].iloc[-1],
+        # umidade=df['UR'].iloc[-1],
+        # indice_uv=df['Indice UV'].iloc[-1],
+        # velocidade_vento=df['U2'].iloc[-1],
+        # data=df['Data'].iloc[-1]
+        data=df['Data'].iloc[-1],
         temps_media=df['Tmed'].iloc[-1],
         umidade=df['UR'].iloc[-1],
         indice_uv=df['Indice UV'].iloc[-1],
         velocidade_vento=df['U2'].iloc[-1],
-        data=df['Data'].iloc[-1]
+        rg=df['Rg (MJ)'].iloc[-1],
+        evapo=df['ET (mm/dia)'].iloc[-1],
+        pp=df['PP'].iloc[-1]
     )
 
     # Cria e adiciona a view principal

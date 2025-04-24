@@ -13,11 +13,11 @@ class HomeView:
     def build(self) -> ft.Column:
         return ft.Column([
             self._build_header(),
-            ft.Container(height=20),
+            # ft.Container(height=20),
             self._build_icons_row(),
-            ft.Container(height=20),
+            # ft.Container(height=20),
             self._build_sections_row(),
-            ft.Container(height=20),
+            # ft.Container(height=20),
             self._build_values_row(),
             self._build_date_display()
         ], scroll=ft.ScrollMode.AUTO)
@@ -40,9 +40,10 @@ class HomeView:
     def _build_icons_row(self) -> ft.Row:
         return ft.Row(
             controls=[
-                ft.Image(src="img/weather.png", width=170, height=120),
+                ft.Image(src="img/humidity.png", width=170, height=120),
                 ft.Image(src="img/raios.png", width=160, height=130),
                 ft.Image(src="img/temperatura-baixa.png", width=170, height=130),
+                ft.Image(src="img/wind_2531693.png", width=190, height=130),
                 ft.Image(src="img/wind_2531693.png", width=190, height=130)
             ],
             spacing=100,
@@ -55,7 +56,8 @@ class HomeView:
                 criar_secao("UMIDADE"),
                 criar_secao("ÍNDICE UV"),
                 criar_secao("TEMPERATURA"),
-                criar_secao("VELOCIDADE DO VENTO")
+                criar_secao("VELOCIDADE DO VENTO"),
+                criar_secao("Precipitação")
             ],
             spacing=25,
             alignment=ft.MainAxisAlignment.CENTER
@@ -67,7 +69,8 @@ class HomeView:
                 self._create_value_container(self.classificacao.umidade, "%"),
                 self._create_value_container(self.classificacao.indice_uv),
                 self._create_value_container(self.classificacao.temperatura_media, "°C"),
-                self._create_value_container(self.classificacao.velocidade_vento, "m/s")
+                self._create_value_container(self.classificacao.velocidade_vento, "m/s"),
+                self._create_value_container(self.classificacao.precipitacao, "mm")
             ],
             spacing=20,
             alignment=ft.MainAxisAlignment.CENTER
@@ -76,7 +79,9 @@ class HomeView:
     def _create_value_container(self, value, unit: str = "") -> ft.Container:
         return ft.Container(
             width=280 if unit == "%" else 250,
-            height=310,
+            # Lembrar de comentar a linha abaixo
+            border=ft.border.all(1, ft.colors.BLACK),#trecho apenas para testes visuais
+            height=110,
             bgcolor=colors.BACKGROUND,
             border_radius=10,
             padding=20,
@@ -91,7 +96,7 @@ class HomeView:
                 self.classificacao.data,
                 size=26,
                 weight=ft.FontWeight.BOLD,
-                color=ft.colors.WHITE
+                color=ft.colors.BLACK
             ),
             alignment=ft.alignment.center_right,
             padding=ft.padding.only(right=40)

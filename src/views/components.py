@@ -18,13 +18,15 @@ def criar_caixa_valor(value, unit: str = "", bg_color: str = colors.VALUE_BOX) -
     return ft.Container(
         width=190,
         height=100,
+        # Lembrar de comentar a linha abaixo
+        border=ft.border.all(1, ft.colors.BLACK),#trecho apenas para testes visuais
         bgcolor=bg_color,
         border_radius=10,
         alignment=ft.alignment.center,
         content=ft.Text(f"{value}{unit}", 
-                       size=48, 
-                       weight=ft.FontWeight.BOLD, 
-                       color=ft.colors.WHITE)
+                       size = 38,
+                       weight = ft.FontWeight.BOLD, 
+                       color = ft.colors.WHITE)
     )
 
 def criar_cabecalho() -> ft.Container:
