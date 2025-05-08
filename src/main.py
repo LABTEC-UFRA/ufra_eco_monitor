@@ -1,3 +1,6 @@
+import os
+print("Diretório atual:", os.getcwd())
+
 import flet as ft
 from models.leitor import Leitor
 from models.classificacao import ClassificacaoClimatica
@@ -13,7 +16,7 @@ def main(page: ft.Page):
 
     # Carrega os dados
     leitor = Leitor()
-    df = leitor.leitor_pandas(r'.\files\BD_diario.csv')
+    df = leitor.leitor_pandas(r'C:\Users\sr.jarvis\OneDrive\Documentos\GitHub\ecomonitor')
     
     classificacao = ClassificacaoClimatica(
         # temps_media=df['Tmed'].iloc[-1],
