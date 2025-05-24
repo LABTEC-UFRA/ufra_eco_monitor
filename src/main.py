@@ -6,6 +6,12 @@ from models.leitor import Leitor
 from models.classificacao import ClassificacaoClimatica
 from views.home_view import HomeView
 
+
+# Elementos da interface
+# titulo = ft.Text("Bem-vindo ao ECOMONITOR", size=24, weight="bold")
+botao = ft.ElevatedButton("Atualizar Dados")
+
+
 def main(page: ft.Page):
     # Configuração da página
     page.title = "ECOMONITOR"
@@ -16,14 +22,10 @@ def main(page: ft.Page):
 
     # Carrega os dados
     leitor = Leitor()
-    df = leitor.leitor_pandas(r'C:\Users\sr.jarvis\OneDrive\Documentos\GitHub\ecomonitor')
+    df = leitor.leitor_pandas(r'files\BD_diario.csv')
     
     classificacao = ClassificacaoClimatica(
-        # temps_media=df['Tmed'].iloc[-1],
-        # umidade=df['UR'].iloc[-1],
-        # indice_uv=df['Indice UV'].iloc[-1],
-        # velocidade_vento=df['U2'].iloc[-1],
-        # data=df['Data'].iloc[-1]
+       
         data=df['Data'].iloc[-1],
         temps_media=df['Tmed'].iloc[-1],
         umidade=df['UR'].iloc[-1],
@@ -38,4 +40,4 @@ def main(page: ft.Page):
     home_view = HomeView(classificacao)
     page.add(home_view.build())
 
-ft.app(target=main)
+ft.app(target=main,  view=ft.WEB_BROWSER)

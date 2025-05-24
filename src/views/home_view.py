@@ -11,16 +11,13 @@ class HomeView:
         self.classificacao = classificacao
     
     def build(self) -> ft.Column:
-        return ft.Column([
-            self._build_header(),
-            # ft.Container(height=20),
-            self._build_icons_row(),
-            # ft.Container(height=20),
-            self._build_sections_row(),
-            # ft.Container(height=20),
-            self._build_values_row(),
-            self._build_date_display()
-        ], scroll=ft.ScrollMode.AUTO)
+     return ft.Column([
+        self._build_date_display(),  # Agora a data aparece primeiro e aperece na parete de cima 
+        self._build_header(),
+        self._build_icons_row(),
+        self._build_sections_row(),
+        self._build_values_row()
+    ], scroll=ft.ScrollMode.AUTO)
 
     def _build_header(self) -> ft.Container:
         header = criar_cabecalho()
@@ -80,7 +77,7 @@ class HomeView:
         return ft.Container(
             width=280 if unit == "%" else 250,
             # Lembrar de comentar a linha abaixo
-            border=ft.border.all(1, ft.colors.BLACK),#trecho apenas para testes visuais
+            border=ft.border.all(1, ft.colors.WHITE),#trecho apenas para testes visuais
             height=110,
             bgcolor=colors.BACKGROUND,
             border_radius=10,
@@ -91,13 +88,15 @@ class HomeView:
         )
 
     def _build_date_display(self) -> ft.Container:
-        return ft.Container(
-            content=ft.Text(
-                self.classificacao.data,
-                size=26,
-                weight=ft.FontWeight.BOLD,
-                color=ft.colors.BLACK
-            ),
-            alignment=ft.alignment.center_right,
-            padding=ft.padding.only(right=40)
-        )
+         return ft.Container(
+        content=ft.Text(
+            f"Data: {self.classificacao.data}",  
+            size=26,
+            weight=ft.FontWeight.BOLD,
+            color=ft.colors.BLACK
+        ),
+        alignment=ft.alignment.center,  
+        padding=ft.padding.symmetric(horizontal=40, vertical=10),  
+        bgcolor=ft.colors.GREY_200  
+    )
+        
