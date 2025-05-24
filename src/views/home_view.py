@@ -32,6 +32,16 @@ class HomeView:
                 padding=ft.padding.only(left=40)
             )
         )
+        header.content.controls.append(
+            ft.Container(
+                content=ft.Text(
+                    f"Data: {self.classificacao.data}", 
+                    size=14, 
+                    weight=ft.FontWeight.BOLD, 
+                    color=ft.colors.WHITE
+                ),
+            )
+        )
         return header
 
     def _build_icons_row(self) -> ft.Row:
@@ -90,13 +100,9 @@ class HomeView:
     def _build_date_display(self) -> ft.Container:
          return ft.Container(
         content=ft.Text(
-            f"Data: {self.classificacao.data}",  
-            size=26,
-            weight=ft.FontWeight.BOLD,
-            color=ft.colors.BLACK
         ),
         alignment=ft.alignment.center,  
-        padding=ft.padding.symmetric(horizontal=40, vertical=10),  
+        padding=ft.padding.symmetric(horizontal=50, vertical=10),  
         bgcolor=ft.colors.GREY_200  
     )
         
