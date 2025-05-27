@@ -49,47 +49,52 @@ def main(page: ft.Page):
     # Componentes da interface
     def criar_secao(title, bg_color=ft.colors.BLUE_GREY_100):
         return ft.Container(
-            width=250,
-            height=80,
+            width=300,
+            height=150,
             bgcolor=bg_color,
             border_radius=10,
             padding=10,
+            alignment=ft.alignment.center,
             content=ft.Column([
-                ft.Text(title, size=18, weight=ft.FontWeight.BOLD),
+                ft.Text(title, size=20, weight=ft.FontWeight.BOLD),
                 # ft.Text(f"{value}{unit}", size=30, weight=ft.FontWeight.BOLD)
             ], alignment=ft.MainAxisAlignment.CENTER, horizontal_alignment=ft.CrossAxisAlignment.CENTER)
         )
 
     def definir_valores_caixa(value, unit="", bg_color=ft.colors.BLUE_GREY_600):
         return ft.Container(
-            width=190,
-            height=100,
+            width=300,
+            height=150,
             bgcolor=bg_color,
             border_radius=10,
             alignment=ft.alignment.center,
-            content=ft.Text(f"{value}{unit}", size=48, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE)
+            content=ft.Text(f"{value}{unit}", size=48, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE,  text_align=ft.TextAlign.CENTER)
         )
 
     # Cabeçalho
     header = ft.Container(
-        width=1440,
-        height=240,
-        gradient=ft.LinearGradient(
-            begin=ft.alignment.top_left,
-            end=ft.alignment.bottom_right,
-            colors=["#4A62AA", "#51BCCF"]
+    width=1440,
+    height=240,
+    gradient=ft.LinearGradient(
+        begin=ft.alignment.top_left,
+        end=ft.alignment.bottom_right,
+        colors=["#4A62AA", "#51BCCF"]
+    ),
+    content=ft.Column([
+        ft.Container(
+            content=ft.Text("ECOMONITOR", size=36, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+            padding=ft.padding.only(left=40, top=20),
         ),
-        content=ft.Column([
-            ft.Container(
-                content=ft.Text("ECOMONITOR", size=36, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
-                padding=ft.padding.only(left=40, top=20)
-            ),
-            ft.Container(
-                content=ft.Text("UNIVERSIDADE FEDERAL RURAL DA AMAZÔNIA - UFRA", size=14, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
-                padding=ft.padding.only(left=40)
-            )
-        ])
-    )
+        ft.Container(
+            content=ft.Text("UNIVERSIDADE FEDERAL RURAL DA AMAZÔNIA - UFRA", size=14, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+            padding=ft.padding.only(left=40, top=5),
+        ),
+        ft.Container(
+            content=ft.Text(classificacao.data, size=26, weight=ft.FontWeight.BOLD, color=ft.colors.WHITE),
+            padding=ft.padding.only(left=40, top=10),
+        )
+    ])
+)
 
     # Ícones
     icons_row = ft.Row(

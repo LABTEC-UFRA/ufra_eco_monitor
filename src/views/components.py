@@ -3,11 +3,12 @@ from utils.constants import colors
 
 def criar_secao(title: str, bg_color: str = colors.SECTION_BG) -> ft.Container:
     return ft.Container(
-        width=250,
-        height=80,
+        width=300,
+        height=150,
         bgcolor=bg_color,
         border_radius=10,
         padding=10,
+        alignment=ft.alignment.center,
         content=ft.Column([
             ft.Text(title, size=18, weight=ft.FontWeight.BOLD),
         ], alignment=ft.MainAxisAlignment.CENTER, 
@@ -16,8 +17,8 @@ def criar_secao(title: str, bg_color: str = colors.SECTION_BG) -> ft.Container:
 
 def criar_caixa_valor(value, unit: str = "", bg_color: str = colors.VALUE_BOX) -> ft.Container:
     return ft.Container(
-        width=190,
-        height=100,
+        width=300,
+        height=150,
         # Lembrar de comentar a linha abaixo
         border=ft.border.all(1, ft.colors.BLACK),#trecho apenas para testes visuais
         bgcolor=bg_color,

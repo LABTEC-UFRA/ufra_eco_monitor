@@ -143,9 +143,6 @@ class HomeView:
     def _build_date_display(self) -> ft.Container:
          return ft.Container(
         content=ft.Text(
-        ),
-        alignment=ft.alignment.center,  
-        padding=ft.padding.symmetric(horizontal=50, vertical=10),  
-        bgcolor=ft.colors.GREY_200  
+        )
     )
         
