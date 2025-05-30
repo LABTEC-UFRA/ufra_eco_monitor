@@ -2,7 +2,7 @@
 
 import flet as ft
 from components.header import Header
-# from components.icon_row import IconRow
+from components.icon_row import IconRow
 # from components.label_row import LabelRow
 # from components.value_cards import ValueCards
 from utils.constants import Colors 
@@ -32,7 +32,7 @@ class HomeView(ft.Container):
         self.content = ft.Column(
             controls=[
                 Header(self.classificacao, header_height),# instancia do cabeçalho da aplicação
-                IconRow(),  # Linha de ícones
+                # IconRow(vertical=True),  # Linha de ícones
                 # LabelRow(),  # Linha de rótulos (comentada, mas pode ser descomentada se necessário)
                 # ValueCards(self.classificacao),  # Cartões de valores (comentada, mas pode ser descomentada se necessário)
                 self.dinamic_layout_container
@@ -52,16 +52,16 @@ class HomeView(ft.Container):
         # Atualiza o layout com base na largura da tela
         if page_width < 700:
             layout = ft.Column([
-                ft.Text("Conteúdo temporário", size=20)  # Texto temporário para visualização
-                # IconRow(vertical=True),
+                IconRow(vertical=True),
+                ft.Text("Conteúdo temporário", size=20),  # Texto temporário para visualização
                 # LabelRow(vertical=True),
                 # ValueCards(self.classificacao, vertical=True)
             ], 
             alignment=ft.MainAxisAlignment.CENTER,)
         else:
             layout = ft.Row([
-                ft.Text("Conteúdo temporário", size=20, color=Colors.TEXT )  # Texto temporário para visualização
-                # IconRow(),
+                IconRow(),
+                ft.Text("Conteúdo temporário", size=20, color=Colors.TEXT ),  # Texto temporário para visualização
                 # LabelRow(),
                 # ValueCards(self.classificacao)
             ],
@@ -70,21 +70,3 @@ class HomeView(ft.Container):
         self.dinamic_layout_container.content = layout
         self.update()  # Atualiza a view (UserControl) - necessário para refletir as mudanças no layout
        
-    # def _build_date_display(self):
-    #     '''
-    #     Cria um componente de exibição de data.
-    #     Exibe a data referente aos dados meteorológicos.
-    #     Retorna:
-    #         ft.Container: Um componente de contêiner que exibe a data da classificação.
-    #     '''
-    #     return ft.Container(
-    #         content=ft.Text(
-    #             f"Data: {self.classificacao.data}",
-    #             size=26,
-    #             weight=ft.FontWeight.BOLD,
-    #             color=Colors.TEXT
-    #         ),
-    #         alignment=ft.alignment.center,
-    #         padding=ft.padding.symmetric(horizontal=40, vertical=10),
-    #         bgcolor=Colors.BACKGROUND
-    #     )
