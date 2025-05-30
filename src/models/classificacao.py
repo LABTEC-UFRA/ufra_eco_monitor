@@ -1,107 +1,81 @@
 from datetime import datetime
-from statistics import mean
+from dataclasses import dataclass, field
 
+@dataclass
 class ClassificacaoClimatica:
-    def __init__(self, temps_media = None, umidade = None, indice_uv = None, pp= None, velocidade_vento = None, data = None, rg = None ,evapo = None):
-        self.erro              = ""
-        self.temperatura_media = temps_media
-        self.umidade           = umidade
-        self.indice_uv         = indice_uv
-        self.velocidade_vento  = velocidade_vento
-        self.radiacao_global   = rg
-        self.evapotranspiracao = evapo
-        self.precipitacao      = pp
-        self.data              = data
-    @property
-    def temperatura_media(self):
-        return self.__temperatura_media
-    
-    @temperatura_media.setter
-    def temperatura_media(self, temps_media):
-        # media = mean(temps_media)        
-        self.__temperatura_media = temps_media
+    temps_media: float
+    umidade_: float
+    ind_uv: float
+    velo_vento: float
+    rad_global: float
+    evapotranspiracao_: float
+    precip: float # Precipitação
+    data_: str
+    erro: str = field(init=False, default="")  # campo que não será passado no construtor
 
-    @property
-    def umidade(self):
-        return self.__umidade
-    
-    @umidade.setter
-    def umidade(self, umidade):
-        # media = mean(umidade)
-        if self.__validar_umidade(umidade): 
-            self.__umidade = umidade
+    def __post_init__(self):
+        ''' 
+        Método chamado após a inicialização do dataclass para validar os dados. 
+        Ele verifica se os valores fornecidos atendem aos critérios esperados.
+        '''
 
-    @property
-    def indice_uv(self):
-        return self.__indice_uv
-    
-    @indice_uv.setter
-    def indice_uv(self, indice_uv):
-        # media = mean(indice_uv)
-        if self.__validar_indice_uv(indice_uv): 
-            self.__indice_uv = indice_uv
-        else:
-            self.__indice_uv = -1
-          
-    @property
-    def velocidade_vento(self):
-        return self.__velocidade_vento
-
-    @velocidade_vento.setter
-    def velocidade_vento(self, velocidade_vento):
-        # media = mean(velocidade_vento)
-        if self.__validar_velocidade_vento(velocidade_vento):
-            self.__velocidade_vento = velocidade_vento
-        else:
-            self.__velocidade_vento = -1 
-
-    @property
-    def radiacao_global(self):
-        return self.__radiacao_global
-    
-    @radiacao_global.setter
-    def radiacao_global(self, rg):
-        if self.__validar_radiacao_global(rg):
-            self.__radiacao_global = rg 
-        else:
-            self.__radiacao_global = -1
-
-
-    @property
-    def evapotranspiracao(self):
-        return self.__evapotranspiracao
-    
-    @evapotranspiracao.setter
-    def evapotranspiracao(self, evapo):
-        if self.__validar_evapotranspiracao(evapo):
-            self.__evapotranspiracao = evapo
-        else:
-            self.__evapotranspiracao= -1
-
-    @property
-    def precipitacao (self):
-        return self.__precipitacao
-    
-    @precipitacao.setter
-    def precipitacao(self,pp):
-        if self.__validar_precipitacao(pp):
-            self.__precipitacao = pp
-        else:
-            self.__validar_precipitacao = -1    
-
-
-    @property
-    def data(self):
-        return self.__data
-    
-    @data.setter
-    def data(self, data):
-        if self.__validar_data(data):
-            self.__data = data
-        else:
-            self.__validar_data = -1
+        if not isinstance(self.temps_media, (int, float)):
+            raise TypeError("A temperatura média deve ser um número.")
         
+        if not self.__validar_umidade(self.umidade_):
+            raise ValueError(self.erro)
+        
+        if not self.__validar_indice_uv(self.ind_uv):
+            raise ValueError(self.erro)
+        
+        if not self.__validar_velocidade_vento(self.velo_vento):
+            raise ValueError(self.erro)
+        
+        if not self.__validar_radiacao_global(self.rad_global):
+            raise ValueError(self.erro)
+        
+        if not self.__validar_evapotranspiracao(self.evapotranspiracao_):
+            raise ValueError(self.erro)
+        
+        if not self.__validar_precipitacao(self.precip):
+            raise ValueError(self.erro)
+        
+        if not self.__validar_data(self.data_):
+            raise ValueError(self.erro)
     
+
+    @property
+    def temperatura_media(self) -> float:
+        return self.temps_media
+    
+    @property
+    def umidade(self) -> float:
+        return self.umidade_
+    
+    @property
+    def indice_uv(self) -> float:
+        return self.ind_uv
+
+    @property
+    def velocidade_vento(self) -> float:
+        return self.velo_vento
+
+    @property
+    def radiacao_global(self) -> float:
+        return self.rad_global
+    
+    @property
+    def evapotranspiracao(self) -> float:
+        return self.evapotranspiracao_
+
+    @property
+    def precipitacao(self) -> float:
+        return self.precip
+    
+    @property
+    def data(self) -> str:
+        return self.data_
+        
     def __validar_umidade(self, umidade) -> bool:      
         valido = False
         if isinstance(umidade, (int, float)) and umidade >= 0:
@@ -167,15 +141,13 @@ class ClassificacaoClimatica:
             print("A data deve ser uma string.")
         return valido
     
-
-
     def __str__(self):        
         classificacao = f"""
          CLASSIFICAÇÃO CLIMÁTICA 
         --------------------------
         Data: {self.data}
         Temperatura Média: {self.temperatura_media:.2f}°C
-        Umidade: {self.umidade}%
+        Umidade: {self.umidade_}%
         Índice UV: {self.indice_uv}
         velocidade do vento: {self.velocidade_vento}
         Radiação Global : {self.radiacao_global}

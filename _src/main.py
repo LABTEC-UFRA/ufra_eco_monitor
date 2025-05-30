@@ -30,12 +30,12 @@ def main(page: ft.Page):
        
         data=df['Data'].iloc[-1],
         temps_media=df['Tmed'].iloc[-1],
-        umidade=df['UR'].iloc[-1],
+        umidade_=df['UR'].iloc[-1],
         indice_uv=df['Indice UV'].iloc[-1],
         velocidade_vento=df['U2'].iloc[-1],
         rg=df['Rg (MJ)'].iloc[-1],
         evapo=df['ET (mm/dia)'].iloc[-1],
-        pp=df['PP'].iloc[-1]
+        precip=df['PP'].iloc[-1]
     )
 
     # Cria e adiciona a view principal
@@ -57,4 +57,6 @@ def main(page: ft.Page):
     # page.on_view_pop = lambda e: view_column.controls[2].content = home_view._layout_por_largura(page.width)  # Essa linha garante que o layout seja atualizado ao voltar para a view
     page.add(view_column)
 
-ft.app(target=main,  view=ft.WEB_BROWSER) # type: ignore
+# ft.app(target=main,  view=ft.WEB_BROWSER) # type: ignore
+# ft.app(target=main) # executando no desktop
+ft.app(target=main, view=ft.WEB_BROWSER) # Descomente para rodar no navegador # type: ignore
