@@ -31,9 +31,8 @@ class HomeView(ft.Container):
         # incluindo a exibição de data, cabeçalho e layout adaptável
         self.content = ft.Column(
             controls=[
-                # self._build_date_display(),
                 Header(self.classificacao, header_height),# instancia do cabeçalho da aplicação
-                # IconRow(),  # Linha de ícones (comentada, mas pode ser descomentada se necessário)
+                IconRow(),  # Linha de ícones
                 # LabelRow(),  # Linha de rótulos (comentada, mas pode ser descomentada se necessário)
                 # ValueCards(self.classificacao),  # Cartões de valores (comentada, mas pode ser descomentada se necessário)
                 self.dinamic_layout_container
