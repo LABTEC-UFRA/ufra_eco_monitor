@@ -5,6 +5,8 @@ from components.header import Header
 from components.icon_row import IconRow
 # from components.label_row import LabelRow
 # from components.value_cards import ValueCards
+from components.info_card import InfoCard
+from utils.constants import IconURL
 from utils.constants import Colors 
 from models.classificacao import ClassificacaoClimatica as cl
 
@@ -18,10 +20,8 @@ class HomeView(ft.Container):
             dinamic_layout_container (ft.Container): Contêiner que será atualizado dinamicamente com base na largura da tela.
             content (ft.Column): Coluna que contém os componentes da visão, incluindo a exibição de data e o cabeçalho.
         Métodos:
-            build(): Constrói o layout inicial da visão.
             update_layout(page_width: int): Atualiza o layout com base na largura da tela.
-            _build_date_display(): Cria um componente de exibição de data.
-    '''
+        '''
     def __init__(self, classificacao: cl, header_height: float = 140):
         super().__init__()
         self.classificacao = classificacao # Recebe um objeto de classificação que contém dados climaticos a serem exibidos
@@ -32,9 +32,6 @@ class HomeView(ft.Container):
         self.content = ft.Column(
             controls=[
                 Header(self.classificacao, header_height),# instancia do cabeçalho da aplicação
-                # IconRow(vertical=True),  # Linha de ícones
-                # LabelRow(),  # Linha de rótulos (comentada, mas pode ser descomentada se necessário)
-                # ValueCards(self.classificacao),  # Cartões de valores (comentada, mas pode ser descomentada se necessário)
                 self.dinamic_layout_container
             ],
             scroll=ft.ScrollMode.AUTO
@@ -49,24 +46,21 @@ class HomeView(ft.Container):
         Args:
             page_width (int): A largura atual da página, usada para determinar o layout adequado.
         '''
-        # Atualiza o layout com base na largura da tela
-        if page_width < 700:
-            layout = ft.Column([
-                IconRow(vertical=True),
-                ft.Text("Conteúdo temporário", size=20),  # Texto temporário para visualização
-                # LabelRow(vertical=True),
-                # ValueCards(self.classificacao, vertical=True)
-            ], 
-            alignment=ft.MainAxisAlignment.CENTER,)
-        else:
-            layout = ft.Row([
-                IconRow(),
-                ft.Text("Conteúdo temporário", size=20, color=Colors.TEXT ),  # Texto temporário para visualização
-                # LabelRow(),
-                # ValueCards(self.classificacao)
-            ],
-            alignment=ft.MainAxisAlignment.CENTER,)
+        vertical = page_width < 700
 
-        self.dinamic_layout_container.content = layout
-        self.update()  # Atualiza a view (UserControl) - necessário para refletir as mudanças no layout
-       
+        cards = [
+            InfoCard("Temperatura (°C)", str(self.classificacao.temperatura_media), IconURL.TEMPERATURA.value, vertical),
+            InfoCard("Umidade (%)", str(self.classificacao.umidade), IconURL.UMIDADE.value, vertical),
+            InfoCard("Índice UV", str(self.classificacao.indice_uv), IconURL.INDICE_UV.value, vertical),
+            InfoCard("Velocidade do Vento (m/s)", str(self.classificacao.velocidade_vento), IconURL.VENTO.value, vertical),
+            InfoCard("Precipitação (mm)", str(self.classificacao.precipitacao), IconURL.PRECIPITACAO.value, vertical),
+        ]
+
+        layout_cls = ft.Column if vertical else ft.Row
+
+        self.dinamic_layout_container.content = layout_cls(
+            controls=cards,
+            alignment=ft.MainAxisAlignment.CENTER,
+            spacing=20
+        )
+        self.update()

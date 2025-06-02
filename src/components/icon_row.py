@@ -1,11 +1,12 @@
 import flet as ft
+from utils.constants import Colors  
 
 class IconRow (ft.Container):
     def __init__(self, vertical: bool = False):
         super().__init__()
         
         layout_cls = ft.Column if vertical else ft.Row
-        icons_size = (50, 50) if vertical else (150, 150)  # Define o tamanho dos ícones com base na orientação
+        icons_size = (50, 50) if vertical else (120, 120)  # Define o tamanho dos ícones com base na orientação
         
         layout_kwargs = {
             "controls": [
@@ -27,3 +28,7 @@ class IconRow (ft.Container):
         self.padding = ft.padding.all(10) # Define o espaçamento interno do contêiner
         self.alignment = ft.alignment.center  # Centraliza o conteúdo do contêiner
         self.expand = True # Permite que o contêiner ocupe todo o espaço disponível
+        self.border = ft.border.all(5, Colors.CARD_BORDER) 
+        self.bgcolor = Colors.OTHER  # Define a cor de fundo do contêiner
+        # self.height = 200
+        #self.wrap = True  # Permite que o conteúdo se ajuste ao tamanho do contêiner
