@@ -2,12 +2,8 @@
 
 import flet as ft
 from components.header import Header
-from components.icon_row import IconRow
-# from components.label_row import LabelRow
-# from components.value_cards import ValueCards
 from components.info_card import InfoCard
 from utils.constants import IconURL
-from utils.constants import Colors 
 from models.classificacao import ClassificacaoClimatica as cl
 
 class HomeView(ft.Container):
@@ -31,7 +27,7 @@ class HomeView(ft.Container):
         # incluindo a exibição de data, cabeçalho e layout adaptável
         self.content = ft.Column(
             controls=[
-                Header(self.classificacao, header_height),# instancia do cabeçalho da aplicação
+                Header(self.classificacao, self.header_height),# instancia do cabeçalho da aplicação
                 self.dinamic_layout_container
             ],
             scroll=ft.ScrollMode.AUTO
@@ -49,18 +45,41 @@ class HomeView(ft.Container):
         vertical = page_width < 700
 
         cards = [
-            InfoCard("Temperatura (°C)", str(self.classificacao.temperatura_media), IconURL.TEMPERATURA.value, vertical),
-            InfoCard("Umidade (%)", str(self.classificacao.umidade), IconURL.UMIDADE.value, vertical),
-            InfoCard("Índice UV", str(self.classificacao.indice_uv), IconURL.INDICE_UV.value, vertical),
-            InfoCard("Velocidade do Vento (m/s)", str(self.classificacao.velocidade_vento), IconURL.VENTO.value, vertical),
-            InfoCard("Precipitação (mm)", str(self.classificacao.precipitacao), IconURL.PRECIPITACAO.value, vertical),
+            ft.Container(
+                content=InfoCard("Temperatura (°C)", str(self.classificacao.temperatura_media), IconURL.TEMPERATURA.value, vertical),
+                col={"xs": 12, "sm": 6, "md": 4}
+            ),
+            ft.Container(
+                content=InfoCard("Umidade (%)", str(self.classificacao.umidade), IconURL.UMIDADE.value, vertical),
+                col={"xs": 12, "sm": 6, "md": 4}
+            ),
+            ft.Container(
+                content=InfoCard("Índice UV", str(self.classificacao.indice_uv), IconURL.INDICE_UV.value, vertical),
+                col={"xs": 12, "sm": 6, "md": 4}
+            ),
+            ft.Container(
+                content=InfoCard("Velocidade do Vento (m/s)", str(self.classificacao.velocidade_vento), IconURL.VENTO.value, vertical),
+                col={"xs": 12, "sm": 6, "md": 4}
+            ),
+            ft.Container(
+                content=InfoCard("Precipitação (mm)", str(self.classificacao.precipitacao), IconURL.PRECIPITACAO.value, vertical),
+                col={"xs": 12, "sm": 6, "md": 4}
+            ),
         ]
 
-        layout_cls = ft.Column if vertical else ft.Row
+        # layout_cls = ft.Column if vertical else ft.Row
 
-        self.dinamic_layout_container.content = layout_cls(
+        # self.dinamic_layout_container.content = layout_cls(
+        #     controls=cards,
+        #     alignment=ft.MainAxisAlignment.CENTER,
+        #     spacing=20
+        # )
+
+        self.dinamic_layout_container.content = ft.ResponsiveRow(
             controls=cards,
-            alignment=ft.MainAxisAlignment.CENTER,
-            spacing=20
+            spacing=20,
+            run_spacing=20,
+            alignment=ft.MainAxisAlignment.CENTER
         )
+
         self.update()

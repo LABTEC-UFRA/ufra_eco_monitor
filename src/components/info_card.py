@@ -12,7 +12,7 @@ class InfoCard(ft.Container):
     def __init__(self, titulo: str, valor: str, icon_url: str, vertical: bool = False, width: int = 200, height: int = 140):
         super().__init__()
 
-        icon = ft.Image(src=icon_url, width=60, height=60)
+        icon = ft.Image(src=icon_url, width=50, height=50)
         titulo_text = ft.Text(titulo, size=14, weight=ft.FontWeight.BOLD, color=Colors.TEXT)
         valor_text = ft.Text(valor, size=18, weight=ft.FontWeight.BOLD, color=Colors.TITLE)
 
