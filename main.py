@@ -32,12 +32,14 @@ class EcoMonitorApp:
         )
 
     def main(self, page: ft.Page):
-        page.title = "ECOMONITOR"
+        page.title = "ECOMONITOR - UFRA"
         page.bgcolor = Colors.BACKGROUND if hasattr(Colors, 'BACKGROUND') else Colors.OTHER
         page.padding = 0
+        page.scroll = ft.ScrollMode.AUTO  # Permite rolagem automática se o conteúdo exceder a altura da página
+        
         page.update()
         header_height: float = page.height * 0.2  # 20% da altura da tela # type: ignore
-        print(f"Altura da página: {page.height}, Header Height: {header_height}")  # type: ignore
+        #print(f"Altura da página: {page.height}, Header Height: {header_height}")  # type: ignore
 
         classificacao = self.carregar_dados()
         self.home_view = HomeView(classificacao, header_height=header_height)

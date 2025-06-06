@@ -19,6 +19,13 @@ class Header(ft.Container):
         self.content = ft.Column(
             controls=[
                 ft.Text(
+                    "ECOMONITOR",
+                    size=26,
+                    weight=ft.FontWeight.BOLD,
+                    color=Colors.TEXT,
+                    text_align=ft.TextAlign.CENTER
+                ),
+                ft.Text(
                     "UNIVERSIDADE FEDERAL RURAL DA AMAZÔNIA - UFRA",
                     size=18,
                     weight=ft.FontWeight.BOLD,
@@ -26,7 +33,7 @@ class Header(ft.Container):
                     text_align=ft.TextAlign.CENTER
                 ),
                 ft.Text(f"Data: {self.classificacao.data}",
-                        size=26,
+                        size=15,
                         color=Colors.TEXT,
                         text_align=ft.TextAlign.CENTER,
                         weight=ft.FontWeight.BOLD,
@@ -37,7 +44,11 @@ class Header(ft.Container):
         )
         
         self.padding = ft.padding.symmetric(horizontal=20, vertical=10)
-        self.bgcolor = Colors.HEADER
+        self.gradient = ft.LinearGradient(
+            begin=ft.alignment.top_left,
+            end=ft.alignment.bottom_right,
+            colors=Colors.GRADIENT_HEADER
+        )
         self.expand = True  # Permite que o cabeçalho ocupe todo o espaço disponível
         self.alignment = ft.alignment.center  # Centraliza o conteúdo do cabeçalho
         self.height = header_height
